@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { LogoutDialogComponent } from '../../dialogs/logout-dialog/logout-dialog.component';
 import { DeviceDetectorService } from '../service/device-detector.service';
 import { SidebarService } from '../service/sidebar.service';
+import { ThemeSwitcherService } from '../../theme-switcher.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -25,7 +26,7 @@ export class SidebarComponent implements OnInit {
 
   public dialog = inject(MatDialog);
 
-  constructor() {}
+  constructor(private themeService: ThemeSwitcherService) {}
 
   ngOnInit(): void {
     this.firebaseAuth.checkAuthStatus();
@@ -48,6 +49,10 @@ export class SidebarComponent implements OnInit {
       width: '350px',
     });
     dialogRef.afterClosed().subscribe((result) => {});
+  }
+
+  toggleTheme() {
+    this.themeService.toggleTheme();
   }
 
   toggle() {
